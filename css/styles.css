@@ -6,3 +6,57 @@
         width: auto;
     }
 }
+
+.banner-modal {
+    padding: 10vw 6vw 8vw 6vw;
+    font-family: 'Nunito';
+    font-style: normal;
+    top: 0;
+}
+.banner-modal h1 {
+    font-size: 7vw;
+}
+.banner-modal li {
+    font-size: 3.8vw;
+    margin: 5vw 0;
+    list-style: none;
+}
+.banner-modal li::before {
+    content: '\2713 \00a0';
+}
+.banner-modal button {
+    color: white;
+    font-size: 3.8vw;
+    background: #78599C;
+    padding: 2vw 10vw;
+}
+.banner-modal button:hover {
+    background: red;
+}
+
+
+
+
+@media (min-width: 991px) {
+    .banner-modal {
+        left: 17%;
+        width: 40%;
+        top: 10%;
+        padding: 2vw 1.5vw 2vw 1.5vw;   
+        background: rgba(255, 255, 255, 0.24);
+        box-shadow: 0px 0px 20px rgba(205, 205, 205, 0.25);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+    }
+    .banner-modal h1 {
+        font-size: 1.75vw;
+    }
+    .banner-modal li {
+        font-size: 0.95vw;
+        margin: 1vw 0;
+    }
+    .banner-modal button {
+        font-size: 0.95vw;
+        padding: 0.5vw 2.5vw;
+    }
+}
