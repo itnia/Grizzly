@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Task</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid search-by-phone-number">
+  <div class="container-fluid search-by-phone-number">
     <div class="row w-100 mt-5">
         <div class="d-flex justify-content-center">
             <form id="contryByPhone" action="phone_code.php" method="POST">
@@ -24,12 +25,38 @@
     <div class="row w-100 pt-3">
         <div class="d-flex justify-content-center"><b class="pe-3">Result:</b> <span id="result"></span></div>
     </div>
-
+</div>
+<div id="popup" class="position-fixed bottom-0 end-0 p-2 mw-100" hidden style="z-index: 1">
+    <div class="p-3 bg-warning">
+        <div>
+            Мы используем cookie. Это позволяет нам анализировать взаимодействие посетителей с сайтом и делать его
+            лучше.
+            Продолжая пользоваться сайтом, вы соглашаетесь с использованием файлов cookie.
+        </div>
+        <div class="d-flex justify-content-end">
+            <div>
+                <button id="close-popup">Закрыть</button>
+                <button id="agree-popup">Согласится</button>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script>
   $(document).ready(function (params) {
+    const popup = document.querySelector('#popup')
+    if (!getCookie('cookie-agreement')) {
+      popup.hidden = false
+      document.querySelector('#close-popup').addEventListener('click', () => {
+        popup.hidden = true
+      })
+      document.querySelector('#agree-popup').addEventListener('click', () => {
+        document.cookie = 'cookie-agreement=true; max-age=86400'
+        popup.hidden = true
+      })
+    }
+
     $('#contryByPhone').submit(function (e) {
       e.preventDefault()
       $.post('/phone_code.php', {
@@ -40,6 +67,13 @@
       })
     })
   })
+
+  function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'
+    ))
+    return matches ? decodeURIComponent(matches[1]) : undefined
+  }
 </script>
 </body>
 </html>
